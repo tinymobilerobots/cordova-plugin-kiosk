@@ -1,3 +1,10 @@
+Fork of https://github.com/honza889/cordova-plugin-kiosk
+
+Changes:
+Topbar is enabled.
+the wait for user to press button to start is set to 1ms
+Shutdown button work - Work in progress
+
 Cordova Kiosk Mode
 ==================
 
