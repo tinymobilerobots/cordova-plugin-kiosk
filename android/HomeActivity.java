@@ -38,6 +38,13 @@ public class HomeActivity extends Activity {
         layout.addView(button, params);
         
         setContentView(layout);
+        
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask(){
+            public void run() {
+                HomeActivity.this.startKioskActivity();
+            }
+        }, 1); // 1 ms
     }
     
     @Override
@@ -48,7 +55,7 @@ public class HomeActivity extends Activity {
             public void run() {
                 HomeActivity.this.startKioskActivity();
             }
-        }, 20000); // 20 seconds
+        }, 1); // 1 ms
     }
     
     @Override
