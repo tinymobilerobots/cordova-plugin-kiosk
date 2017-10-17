@@ -44,23 +44,28 @@ public class HomeActivity extends Activity {
             public void run() {
                 HomeActivity.this.startKioskActivity();
             }
-        }, 1); // 1 ms
+        }, 20000); // 1 ms
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
     
     @Override
     protected void onResume() {
         super.onResume();
+        /*
         Timer timer = new Timer();
         timer.schedule(new TimerTask(){
             public void run() {
                 HomeActivity.this.startKioskActivity();
             }
-        }, 1); // 1 ms
+        }, 20000); // 1 ms
+        */
     }
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        startKioskActivity();
+        //startKioskActivity();
         return true; // prevent event from being propagated
     }
     
