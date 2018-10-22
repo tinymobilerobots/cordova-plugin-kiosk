@@ -39,12 +39,7 @@ public class HomeActivity extends Activity {
         
         setContentView(layout);
         
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask(){
-            public void run() {
-                HomeActivity.this.startKioskActivity();
-            }
-        }, 20000); // 1 ms
+        HomeActivity.this.startKioskActivity();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -53,14 +48,6 @@ public class HomeActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask(){
-            public void run() {
-                HomeActivity.this.startKioskActivity();
-            }
-        }, 20000); // 1 ms
-        */
     }
     
     @Override
