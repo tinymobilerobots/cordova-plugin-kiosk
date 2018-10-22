@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.io.File;
 
 public class KioskActivity extends CordovaActivity {
     
@@ -42,8 +43,24 @@ public class KioskActivity extends CordovaActivity {
         if (running) {
             finish(); // prevent more instances of kiosk activity
         }
+
+        TimerTask tt = new TimerTask(){
+            public void run() {
+                try
+                {
+                    loadUrl(launchUrl);
+                    System.out.println("launchUrl: " + launchUrl);
+                    this.cancel();
+                }
+                catch (Exception e)
+                {
+                    System.out.println("launchUrl: Couldn't find " + launchUrl);
+                }
+            }
+        };
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(tt,0,500);
         
-        loadUrl(launchUrl);
         
         // https://github.com/apache/cordova-plugin-statusbar/blob/master/src/android/StatusBar.java
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
