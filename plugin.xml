@@ -53,11 +53,11 @@
             </activity>
 
             <!-- autorun after the app APK is updated -->
-            <!-- <receiver android:name="jk.cordova.plugin.kiosk.MyPackageReplacedEventReceiver">
+            <receiver android:name="jk.cordova.plugin.kiosk.MyPackageReplacedEventReceiver">
                 <intent-filter>
                     <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 </intent-filter>
-            </receiver> -->
+            </receiver>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
