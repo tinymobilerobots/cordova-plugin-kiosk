@@ -16,46 +16,24 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeActivity extends Activity {
-    
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        if (KioskActivity.running) {
-            System.out.println("HomeActivity closing because already running");
-            finish(); // prevent more instances of kiosk activity
-        }
-        
-        LinearLayout layout = new LinearLayout(this);
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        
-        Button button = new Button(this);
-        button.setText("Click or press any key to begin...");
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                HomeActivity.this.startKioskActivity();
-            }
-        });
-        layout.addView(button, params);
-        
-        setContentView(layout);
-        
         HomeActivity.this.startKioskActivity();
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
+        HomeActivity.this.startKioskActivity();
     }
-    
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //startKioskActivity();
         return true; // prevent event from being propagated
     }
-    
+
     // http://www.andreas-schrade.de/2015/02/16/android-tutorial-how-to-create-a-kiosk-mode-in-android/
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -63,10 +41,10 @@ public class HomeActivity extends Activity {
         if(false && !hasFocus) {
             Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
             sendBroadcast(closeDialog);
-            
+
             ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
             am.moveTaskToFront(getTaskId(), ActivityManager.MOVE_TASK_WITH_HOME);
-            
+
             // sametime required to close opened notification area
             Timer timer = new Timer();
             timer.schedule(new TimerTask(){
@@ -77,10 +55,11 @@ public class HomeActivity extends Activity {
             }, 500); // 0.5 second
         }
     }
-    
+
     private void startKioskActivity() {
         Intent serviceIntent = new Intent(this, KioskActivity.class);
+
+        serviceIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(serviceIntent);
     }
 }
-

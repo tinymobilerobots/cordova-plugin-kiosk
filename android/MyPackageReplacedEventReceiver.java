@@ -10,7 +10,9 @@ import android.content.Intent;
 public class MyPackageReplacedEventReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent newIntent = new Intent(context, HomeActivity.class);
+        Intent newIntent = new Intent(context, KioskActivity.class);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(newIntent);
     }
