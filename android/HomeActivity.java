@@ -57,9 +57,11 @@ public class HomeActivity extends Activity {
     }
 
     private void startKioskActivity() {
-        Intent serviceIntent = new Intent(this, KioskActivity.class);
-
-        serviceIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(serviceIntent);
+      Intent newIntent = new Intent(this, KioskActivity.class);
+      newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+      newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      newIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+      this.startActivity(newIntent);
     }
 }
